@@ -6,6 +6,10 @@ pygame.init()
 pygame.font.init()
 my_font = pygame.font.SysFont('Helvetica', 40)
 
+summon_ui = pygame.image.load("pixil-frame-0.png")
+summon_ui = pygame.transform.scale(summon_ui, (500, 400))
+
+
 # set up variables for the display
 size = (800, 600)
 screen = pygame.display.set_mode(size)
@@ -46,6 +50,8 @@ while run:
         if event.type == pygame.QUIT:  # If user clicked close
 
             run = False
+
+    screen.blit(summon_ui, (315, 200))
 
     pygame.display.update()
 
