@@ -12,6 +12,9 @@ summon_ui = pygame.transform.scale(summon_ui, (500, 400))
 exit_button = pygame.image.load("exit-button.png.png")
 exit_button = pygame.transform.scale(exit_button, (150, 100))
 
+lobby_background = pygame.image.load("background_lobby.gif")
+lobby_background = pygame.transform.scale(lobby_background, (800, 600))
+
 # set up variables for the display
 size = (800, 600)
 screen = pygame.display.set_mode(size)
@@ -59,7 +62,6 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONDOWN and not summon_banner_check and (530 <= x <= 800) and (400 <= y <= 500):
             summon_banner_check = True
-            print("True")
             screen.fill((200, 100, 200))
             screen.blit(exit_button, (0, 0))
 
@@ -67,6 +69,7 @@ while run:
             summon_banner_check = False
 
     if not summon_banner_check:
+        screen.blit(lobby_background, (0, 0))
         screen.blit(summon_ui, (315, 200))
 
     pygame.display.update()
