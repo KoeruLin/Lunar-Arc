@@ -15,6 +15,9 @@ exit_button = pygame.transform.scale(exit_button, (150, 100))
 lobby_background = pygame.image.load("background_lobby.gif")
 lobby_background = pygame.transform.scale(lobby_background, (800, 600))
 
+gacha_banner = pygame.image.load("lunar-arc-gacha-banner(wip)-pixilart (2).png")
+gacha_banner = pygame.transform.scale(gacha_banner, (850, 650))
+
 # set up variables for the display
 size = (800, 600)
 screen = pygame.display.set_mode(size)
@@ -34,7 +37,7 @@ while run:
         x, y = pygame.mouse.get_pos()
         print(x, y)
 
-        if event.type == pygame.MOUSEBUTTONDOWN and summon_banner_check:
+        if event.type == pygame.MOUSEBUTTONDOWN and summon_banner_check and ((430 <= x <= 565 and 520 <= y <= 565) or (600 <= x <= 700 and 520 <= y <= 570)):
 
             for i in range(pull_amount):
                 rng = random.randint(1, 100)
@@ -62,7 +65,8 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONDOWN and not summon_banner_check and (530 <= x <= 800) and (400 <= y <= 500):
             summon_banner_check = True
-            screen.fill((200, 100, 200))
+            screen.fill((128, 128, 128))
+            screen.blit(gacha_banner, (0, 0))
             screen.blit(exit_button, (0, 0))
 
         if summon_banner_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
@@ -75,4 +79,4 @@ while run:
     pygame.display.update()
 
 # Once we have exited the main program loop we can stop the game engine:
-pygame.quit()
+pygame.quit(
