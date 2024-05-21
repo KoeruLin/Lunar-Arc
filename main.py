@@ -1,6 +1,7 @@
 import pygame
 import random
 from defender import Defender
+from enemysoldier import EnemySoldier
 
 # set up pygame modules
 pygame.init()
@@ -22,6 +23,9 @@ gacha_banner = pygame.transform.scale(gacha_banner, (850, 650))
 gacha_background = pygame.image.load("pngtree-rectangle-grey-background-image_354811.jpg")
 gacha_background = pygame.transform.scale(gacha_background, (800, 600))
 
+tutorial_map = pygame.image.load("pixilart-drawing.png")
+tutorial_map = pygame.transform.scale(tutorial_map, (800, 600))
+
 # set up variables for the display
 size = (800, 600)
 screen = pygame.display.set_mode(size)
@@ -40,7 +44,7 @@ while run:
     for event in pygame.event.get():  # User did something
 
         x, y = pygame.mouse.get_pos()
-        #print(x, y)
+        print(x, y)
 
         if event.type == pygame.MOUSEBUTTONDOWN and summon_banner_check and ((430 <= x <= 565 and 520 <= y <= 565) or (600 <= x <= 700 and 520 <= y <= 570)):
             if 430 <= x <= 565 and 520 <= y <= 565:
