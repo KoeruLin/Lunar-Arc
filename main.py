@@ -26,6 +26,9 @@ gacha_background = pygame.transform.scale(gacha_background, (800, 600))
 tutorial_map = pygame.image.load("pixilart-drawing.png")
 tutorial_map = pygame.transform.scale(tutorial_map, (800, 600))
 
+play_button = pygame.image.load("play_button.png")
+play_button = pygame.transform.scale(play_button, (600, 450))
+
 # set up variables for the display
 size = (800, 600)
 screen = pygame.display.set_mode(size)
@@ -34,6 +37,7 @@ pull = []
 pull_amount = 10
 inventory = []
 summon_banner_check = False
+play_game_check = False
 
 # The loop will carry on until the user exits the game (e.g. clicks the close button).
 run = True
@@ -89,12 +93,21 @@ while run:
             screen.blit(gacha_banner, (0, 0))
             screen.blit(exit_button, (0, 0))
 
+        if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and (510 <= x <= 800) and (190 <= y <= 290):
+            play_game_check = True
+            screen.blit(tutorial_map, (0, 0))
+            screen.blit(exit_button, (0, 0))
+
+        if play_game_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
+            play_game_check = False
+
         if summon_banner_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
             summon_banner_check = False
 
-    if not summon_banner_check:
+    if not summon_banner_check and not play_game_check:
         screen.blit(lobby_background, (0, 0))
         screen.blit(summon_ui, (315, 200))
+        screen.blit(play_button, (345, 0))
 
     pygame.display.update()
 
