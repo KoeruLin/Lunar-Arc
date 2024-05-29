@@ -24,9 +24,9 @@ gacha_background = pygame.image.load("pngtree-rectangle-grey-background-image_35
 gacha_background = pygame.transform.scale(gacha_background, (800, 600))
 
 tutorial_map = pygame.image.load("pixilart-drawing.png")
-tutorial_map = pygame.transform.scale(tutorial_map, (800, 600))
+tutorial_map = pygame.transform.scale(tutorial_map, (700, 525))
 
-play_button = pygame.image.load("play_button.png")
+play_button = pygame.image.load("play_button (1).png")
 play_button = pygame.transform.scale(play_button, (600, 450))
 
 # set up variables for the display
@@ -95,6 +95,7 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and (510 <= x <= 800) and (190 <= y <= 290):
             play_game_check = True
+            screen.fill((0, 0, 0))
             screen.blit(tutorial_map, (0, 0))
             screen.blit(exit_button, (0, 0))
 
