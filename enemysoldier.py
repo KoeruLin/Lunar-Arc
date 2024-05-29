@@ -1,5 +1,3 @@
-import pygame
-
 class EnemySoldier:
     def __init__(self, health, defense):
         self.health = health
