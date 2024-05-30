@@ -26,7 +26,7 @@ gacha_background = pygame.transform.scale(gacha_background, (800, 600))
 tutorial_map = pygame.image.load("pixilart-drawing.png")
 tutorial_map = pygame.transform.scale(tutorial_map, (700, 525))
 
-play_button = pygame.image.load("play_button (1).png")
+play_button = pygame.image.load("play_button.png")
 play_button = pygame.transform.scale(play_button, (600, 450))
 
 # set up variables for the display
@@ -64,22 +64,24 @@ while run:
             for i in range(len(pull)):
 
                 if pull[i] <= 40:
-                    defender_common = Defender(random.randint(200, 300), random.randint(300, 400), random.randint(2000, 3000))
+                    defender_common = Defender(random.randint(200, 300), random.randint(300, 400), random.randint(2000, 3000), 0, 0)
                     inventory.append(defender_common)
+                    print("Common")
 
                 elif 41 <= pull[i] <= 90:
-                    defender_rare = Defender(random.randint(300, 400), random.randint(400, 500), random.randint(2500, 3500))
+                    defender_rare = Defender(random.randint(300, 400), random.randint(400, 500), random.randint(2500, 3500), 0, 0)
                     inventory.append(defender_rare)
+                    print("Rare")
 
                 elif 91 <= pull[i] <= 98:
-                    defender_epic = Defender(random.randint(400, 500), random.randint(500, 600), random.randint(3000, 4000))
+                    defender_epic = Defender(random.randint(400, 500), random.randint(500, 600), random.randint(3000, 4000), 0, 0)
                     inventory.append(defender_epic)
+                    print("Epic")
 
                 elif pull[i] == 99 or pull[i] == 100:
-                    defender_legendary = Defender(random.randint(500, 600), random.randint(600, 700), random.randint(3500, 4500))
+                    defender_legendary = Defender(random.randint(500, 600), random.randint(600, 700), random.randint(3500, 4500), 0, 0)
                     inventory.append(defender_legendary)
-
-            print(inventory)
+                    print("Legendary")
 
             list.clear(pull)
 
@@ -87,17 +89,20 @@ while run:
 
             run = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not summon_banner_check and (530 <= x <= 800) and (400 <= y <= 500):
+        if event.type == pygame.MOUSEBUTTONDOWN and not summon_banner_check and not play_game_check and (530 <= x <= 800) and (400 <= y <= 500):
             summon_banner_check = True
             screen.blit(gacha_background, (0, 0))
             screen.blit(gacha_banner, (0, 0))
             screen.blit(exit_button, (0, 0))
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and (510 <= x <= 800) and (190 <= y <= 290):
+        if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and not summon_banner_check and (510 <= x <= 800) and (190 <= y <= 290):
             play_game_check = True
             screen.fill((0, 0, 0))
             screen.blit(tutorial_map, (0, 0))
             screen.blit(exit_button, (0, 0))
+            for i in range(3):
+                test = EnemySoldier(6000, 300, 0, 80)
+                screen.blit(test.enemy_sprite, (test.x, test.y))
 
         if play_game_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
             play_game_check = False
