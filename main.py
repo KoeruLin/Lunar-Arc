@@ -48,7 +48,7 @@ while run:
     for event in pygame.event.get():  # User did something
 
         x, y = pygame.mouse.get_pos()
-        print(x, y)
+        #print(x, y)
 
         if event.type == pygame.MOUSEBUTTONDOWN and summon_banner_check and ((430 <= x <= 565 and 520 <= y <= 565) or (600 <= x <= 700 and 520 <= y <= 570)):
             if 430 <= x <= 565 and 520 <= y <= 565:
@@ -84,6 +84,7 @@ while run:
                     print("Legendary")
 
             list.clear(pull)
+            print(inventory)
 
         if event.type == pygame.QUIT:  # If user clicked close
 
@@ -101,8 +102,19 @@ while run:
             screen.blit(tutorial_map, (0, 0))
             screen.blit(exit_button, (0, 0))
             for i in range(3):
-                test = EnemySoldier(6000, 300, 0, 80)
-                screen.blit(test.enemy_sprite, (test.x, test.y))
+                enemies = EnemySoldier(6000, 300, 0, 80)
+                screen.blit(enemies.enemy_sprite, (enemies.x, enemies.y))
+            for stuff in inventory:
+                z, w = (300, 200)
+                i = 0
+                test_2 = inventory[i]
+                screen.blit(test_2.defender_sprite, (z, w))
+                i += 1
+                z += 25
+                w += 25
+                print(test_2)
+                print(i)
+                print((z, w))
 
         if play_game_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
             play_game_check = False
