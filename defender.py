@@ -1,9 +1,10 @@
 import time
+import pygame
 
 time = time.time()
 
 
-class Defender:
+class Defender(object):
     def __init__(self, attack, defense, health, x, y):
         self.block = 3
         self.attack = attack
@@ -12,6 +13,11 @@ class Defender:
         self.health = health
         self.x = x
         self.y = y
+        self.defender_sprite = pygame.image.load("Dread_Dysipius_Sprite.png")
+        self.defender_sprite = pygame.transform.scale(self.defender_sprite, (100, 75))
+        self.defender_sprite = pygame.transform.flip(self.defender_sprite, True, False)
+        defender_sprite_get = self.defender_sprite.get_size()
+        self.hitbox_defender = pygame.Rect(self.x, self.y, defender_sprite_get[0], defender_sprite_get[1])
 
     def blocked_enemy(self, block_count, enemy_hp):
         time_2 = time.time()
