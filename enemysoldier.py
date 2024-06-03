@@ -13,3 +13,10 @@ class EnemySoldier:
         self.enemy_sprite = pygame.transform.scale(self.enemy_sprite, (100, 75))
         enemy_sprite_get = self.enemy_sprite.get_size()
         self.hitbox = pygame.Rect(self.x, self.y, enemy_sprite_get[0], enemy_sprite_get[1])
+
+    def move(self, x_coordinate, y_coordinate):
+        while self.x != x_coordinate:
+            self.x += 2
+
+            while self.y != y_coordinate:
+                self.y += 2
