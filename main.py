@@ -36,6 +36,9 @@ rng = 0
 pull = []
 pull_amount = 10
 inventory = []
+x_coordinate, y_coordinate = (712, 10)
+rarity = (0, 0, 0)
+surface = pygame.display.set_mode((800, 600))
 summon_banner_check = False
 play_game_check = False
 
@@ -64,22 +67,22 @@ while run:
             for i in range(len(pull)):
 
                 if pull[i] <= 40:
-                    defender_common = Defender(random.randint(200, 300), random.randint(300, 400), random.randint(2000, 3000), 0, 0)
+                    defender_common = Defender(random.randint(200, 300), random.randint(300, 400), random.randint(2000, 3000), 0, 0, 1)
                     inventory.append(defender_common)
                     print("Common")
 
                 elif 41 <= pull[i] <= 90:
-                    defender_rare = Defender(random.randint(300, 400), random.randint(400, 500), random.randint(2500, 3500), 0, 0)
+                    defender_rare = Defender(random.randint(300, 400), random.randint(400, 500), random.randint(2500, 3500), 0, 0, 2)
                     inventory.append(defender_rare)
                     print("Rare")
 
                 elif 91 <= pull[i] <= 98:
-                    defender_epic = Defender(random.randint(400, 500), random.randint(500, 600), random.randint(3000, 4000), 0, 0)
+                    defender_epic = Defender(random.randint(400, 500), random.randint(500, 600), random.randint(3000, 4000), 0, 0, 3)
                     inventory.append(defender_epic)
                     print("Epic")
 
                 elif pull[i] == 99 or pull[i] == 100:
-                    defender_legendary = Defender(random.randint(500, 600), random.randint(600, 700), random.randint(3500, 4500), 0, 0)
+                    defender_legendary = Defender(random.randint(500, 600), random.randint(600, 700), random.randint(3500, 4500), 0, 0, 4)
                     inventory.append(defender_legendary)
                     print("Legendary")
 
@@ -101,20 +104,26 @@ while run:
             screen.fill((0, 0, 0))
             screen.blit(tutorial_map, (0, 0))
             screen.blit(exit_button, (0, 0))
-            for i in range(3):
+            for i in range(1):
                 enemies = EnemySoldier(6000, 300, 0, 80)
                 screen.blit(enemies.enemy_sprite, (enemies.x, enemies.y))
-            for stuff in inventory:
-                z, w = (300, 200)
-                i = 0
-                test_2 = inventory[i]
-                screen.blit(test_2.defender_sprite, (z, w))
-                i += 1
-                z += 25
-                w += 25
-                print(test_2)
-                print(i)
-                print((z, w))
+
+            for i in range(2):
+                blit_defender = inventory[i]
+
+                if blit_defender.rarity == 1:
+                    rarity = (128, 128, 128)
+                elif blit_defender.rarity == 2:
+                    rarity = (0, 150, 255)
+                elif blit_defender.rarity == 3:
+                    rarity = (160, 32, 240)
+                else:
+                    rarity = (255, 215, 0)
+
+                pygame.draw.rect(surface, rarity, pygame.Rect(x_coordinate, y_coordinate, 75, 60), 3)
+                screen.blit(blit_defender.defender_sprite, (x_coordinate, y_coordinate))
+                y_coordinate += 80
+
 
         if play_game_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
             play_game_check = False
