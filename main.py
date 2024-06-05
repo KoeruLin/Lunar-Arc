@@ -35,6 +35,7 @@ screen = pygame.display.set_mode(size)
 rng = 0
 pull = []
 pull_amount = 10
+limit = 0
 inventory = []
 x_coordinate, y_coordinate = (712, 10)
 rarity = (0, 0, 0)
@@ -51,7 +52,7 @@ while run:
     for event in pygame.event.get():  # User did something
 
         x, y = pygame.mouse.get_pos()
-        #print(x, y)
+        print(x, y)
 
         if event.type == pygame.MOUSEBUTTONDOWN and summon_banner_check and ((430 <= x <= 565 and 520 <= y <= 565) or (600 <= x <= 700 and 520 <= y <= 570)):
             if 430 <= x <= 565 and 520 <= y <= 565:
@@ -99,7 +100,7 @@ while run:
             screen.blit(gacha_banner, (0, 0))
             screen.blit(exit_button, (0, 0))
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and not summon_banner_check and (510 <= x <= 800) and (190 <= y <= 290):
+        if event.type == pygame.MOUSEBUTTONDOWN and not play_game_check and not summon_banner_check and (510 <= x <= 800) and (190 <= y <= 290) and len(inventory) >= 1:
             play_game_check = True
             screen.fill((0, 0, 0))
             screen.blit(tutorial_map, (0, 0))
@@ -108,7 +109,7 @@ while run:
                 enemies = EnemySoldier(6000, 300, 0, 80)
                 screen.blit(enemies.enemy_sprite, (enemies.x, enemies.y))
 
-            for i in range(2):
+            for i in range(len(inventory)):
                 blit_defender = inventory[i]
 
                 if blit_defender.rarity == 1:
@@ -120,9 +121,11 @@ while run:
                 else:
                     rarity = (255, 215, 0)
 
-                pygame.draw.rect(surface, rarity, pygame.Rect(x_coordinate, y_coordinate, 75, 60), 3)
-                screen.blit(blit_defender.defender_sprite, (x_coordinate, y_coordinate))
-                y_coordinate += 80
+                while limit < 3:
+                    pygame.draw.rect(surface, rarity, pygame.Rect(x_coordinate, y_coordinate, 75, 70), 3)
+                    screen.blit(blit_defender.defender_sprite, (x_coordinate, y_coordinate))
+                    y_coordinate += 80
+                    limit += 1
 
 
         if play_game_check and event.type == pygame.MOUSEBUTTONDOWN and (30 <= x <= 130) and (30 <= y <= 60):
